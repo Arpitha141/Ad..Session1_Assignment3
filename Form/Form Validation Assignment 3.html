@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form validation</title>
+        <meta charset="UTF-8">
+
+    </head>
+    <body>
+    <fieldset>
+    <legend>Form Validation </legend>
+        <div style="width: 40%; margin: 0 auto;">
+            <h6>Fill the form</h6>
+            <p> Please enter the below form.</p>
+            <form action="javascript:void(0)" method="POST" enctype="multipart/form-data">
+                <label>Last Name: <input type="text" placeholder="Last name" id="lastname" required ></label> <br><br>
+                <label>First Name: <input type="text" placeholder="First name" id="firstname" required ></label> <br><br>
+                <label>Email: <input type="email" placeholder="Email" id="email" required 
+                                        onblur="(function(id){
+                                            var email_id = document.getElementById(id).value;
+                                            function validate(){
+                                                var regpat = /^[a-zA-Z_\0-9\.\-]+@[a-zA-Z_\-\.]+?\.[a-zA-Z]{2,4}$/;
+                                                return regpat.test(email_id);
+                                            }
+                                            alert(validate());
+                                        })('email');">
+                </label><br><br>
+                <label>Phone: <input type="tel" placeholder="Phone" id="phone" required></label><br><br>
+                <label>address: <input type="text" placeholder="Address" id="address"></label><br><br>
+                <input type="submit" value="Submit form"  onclick="(function(){
+                        
+                        var first= document.getElementById('firstname').value;
+                        var last = document.getElementById('lastname').value;
+                        var email = document.getElementById('email').value;
+                        var num = document.getElementById('phone').value;
+                        var regpat = /^[a-zA-Z]*$/;
+
+                        var text= 'The name should not  contain a number or special charset!!! ';
+                        var text1= 'The phone number should contain only numbers and it should be 10 digit. ';
+                        var text2 ='Invalid email Address!!!';
+
+                        console.log(regpat.test(first));
+                        console.log(regpat.test(last));
+
+                        if(regpat.test(first)){
+                            document.write(' <br> The first name is : <b> ' +first +'</b>');
+                        }
+                        else{
+                            document.write('<br> ' +text.fontcolor('red') +first);
+                        }
+
+                        if (regpat.test(last)) {
+                            document.write('<br>  The last name is : <b> ' +last + '</b>');
+                        }
+                        else{
+                            document.write('<br>' +text.fontcolor('red') + last);
+                        }
+
+                        var phone = /^\d{10}$/;
+
+                        if(phone.test(num)){
+                             document.write('<br> The phone number is : <b> ' +num  + '</b>');
+                        }
+                        else {
+                            document.write('<br> ' +text1.fontcolor('red') + num );
+                        }
+
+                        var email_id = /^[a-zA-Z_\0-9\.\-]+@[a-zA-Z_\-\.]+?\.[a-zA-Z]{2,4}$/;
+
+                        if (email_id.test(email)) {
+                            document.write('<br> The email address is : <b> ' +email + '</b>');
+                        }
+
+                        else{
+                            document.write('<br> ' +text2.fontcolor('red') );
+                        }
+                    })();">
+            </form>
+        </div>
+        </fieldset>
+    </body>
+</html>
